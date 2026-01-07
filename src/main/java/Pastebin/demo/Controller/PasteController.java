@@ -18,6 +18,7 @@ import java.time.Instant;
 import java.util.Map;
 
 @Controller
+
 public class PasteController {
 
     private final PasteService pasteService;
@@ -29,7 +30,6 @@ public class PasteController {
     @Value("${TEST_MODE:0}")
     private String testMode;
 
-    // CREATE PASTE
     // CREATE PASTE
     @PostMapping("/api/pastes")
     @ResponseBody
@@ -44,7 +44,7 @@ public class PasteController {
         String baseUrl =
                 request.getScheme()+ "://" +
                         request.getServerName()+
-                        ":"+request.getServerName();
+                        ":"+request.getServerPort();
 
         return new PasteResponse(
                 paste.getId(),
@@ -54,6 +54,7 @@ public class PasteController {
 
     // FETCH PASTE
    @GetMapping("/api/pastes/{id}")
+   @ResponseBody
   public Map<String, Object> fetchPaste(@PathVariable String id,
                                         @RequestHeader(value = "x-test-now-ms",required = false) Long testNow){
         Instant now=("1".equals(testMode) && testNow != null)
