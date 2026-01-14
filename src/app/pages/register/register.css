@@ -1,0 +1,213 @@
+/* =====================================
+   LOGIN PAGE – LIGHT THEME (PRO READY)
+   ===================================== */
+
+/* ---------- THEME VARIABLES ---------- */
+:root {
+  --bg: #f1f5ff;          /* Light blue background */
+  --primary: #f5f6f7;     /* Primary brand blue */
+  --dark: #0b1734;        /* Dark text / button */
+  --text-main: #151516;
+  --text-dim: #64748b;
+  --border-light: #e2e8f0;
+}
+
+/* ---------- PAGE WRAPPER ---------- */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg);
+  padding: 20px;
+}
+
+/* ---------- CARD ---------- */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 60px rgba(11, 23, 52, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.login-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 30px 70px rgba(11, 23, 52, 0.15);
+}
+
+/* ---------- HEADING ---------- */
+.login-card h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--dark);
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.login-card p {
+  text-align: center;
+  color: var(--text-dim);
+  margin-bottom: 30px;
+  font-size: 0.95rem;
+}
+
+/* ---------- FORM GROUP ---------- */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #cfd7e6;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+/* ---------- INPUTS ---------- */
+.form-group input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid var(--border-light);
+  border-radius: 12px;
+  font-size: 15px;
+  background: #edeef3;
+  color: var(--text-main);
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+/* Focus state */
+.form-group input:focus {
+  border-color: var(--primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(4, 58, 141, 0.12);
+  outline: none;
+}
+
+.form-group:focus-within label {
+  color: var(--primary);
+}
+
+/* ---------- PRIMARY BUTTON ---------- */
+.btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--dark);
+  color: #080808;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow:
+    0 4px 0 #a3bae7,
+    0 10px 20px rgba(157, 178, 226, 0.1);
+}
+
+/* Hover */
+.btn:hover:not(:disabled) {
+  background: #5970a0;
+  transform: translateY(-4px);
+  box-shadow:
+    0 8px 0 #020a1a,
+    0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Active */
+.btn:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #506080;
+}
+
+/* Shine animation */
+.btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(147, 144, 208, 0.18),
+    transparent
+  );
+  transition: 0.5s;
+}
+
+.btn:hover::after {
+  left: 100%;
+}
+
+/* Disabled */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* ---------- ERROR / SUCCESS ---------- */
+.error {
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #dc2626;
+  font-size: 0.9rem;
+}
+
+.success {
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #059669;
+  font-size: 0.9rem;
+}
+
+/* ---------- BOTTOM LINK ---------- */
+.link {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+}
+
+.link a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.link a:hover {
+  background: rgba(4, 58, 141, 0.06);
+  text-decoration: underline;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 28px;
+    border-radius: 18px;
+  }
+
+  .login-card h2 {
+    font-size: 1.6rem;
+  }
+}

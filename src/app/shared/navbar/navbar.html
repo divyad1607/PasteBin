@@ -1,0 +1,16 @@
+<header class="navbar">
+
+  <div class="logo">PASTEBIN</div>
+
+  <nav class="nav-center">
+    <a routerLink="/home" routerLinkActive="active">Home</a>
+    <a routerLink="/create" routerLinkActive="active">+ New Paste</a>
+  </nav>
+
+  <div class="nav-right">
+    <a routerLink="/login" class="nav-btn outline">Login</a>
+    <a routerLink="/register" class="nav-btn outline">Register</a>
+    <button class="nav-btn solid" (click)="logout()">Logout</button>
+  </div>
+
+</header>

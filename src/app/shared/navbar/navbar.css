@@ -1,0 +1,76 @@
+/* ===== SLIM NAVBAR ===== */
+.navbar {
+  height: 56px;
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #e0ecff; /* light blue same as page */
+  border-bottom: 1px solid #c7dbff;
+
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+/* LEFT */
+.logo {
+  font-size: 18px;          /* 👈 smaller */
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #0b3a82;
+}
+
+/* CENTER LINKS */
+.nav-center {
+  display: flex;
+  gap: 18px;               /* 👈 reduced gap */
+}
+
+.nav-center a {
+  font-size: 13px;
+  font-weight: 500;
+  color: #2456b3;
+  text-decoration: none;
+  padding-bottom: 4px;
+}
+
+.nav-center a.active {
+  border-bottom: 2px solid #2456b3;
+}
+
+/* RIGHT */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* BUTTONS */
+.nav-btn {
+  font-size: 12px;
+  padding: 6px 12px;        /* 👈 slim buttons */
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Login */
+.nav-btn.outline {
+  background: transparent;
+  border: 1px solid #2456b3;
+  color: #2456b3;
+}
+
+/* Logout / Primary */
+.nav-btn.solid {
+  background: #e11d48;
+  border: none;
+  color: white;
+}
+
+/* Hover */
+.nav-btn:hover {
+  opacity: 0.9;
+}

@@ -1,0 +1,51 @@
+<div class="create-page">
+
+  <div class="premium-card create-card">
+
+    <h1>New Code Snippet</h1>
+    <p class="subtitle">Fill in the details below to share your code.</p>
+
+    <label>Content</label>
+    <textarea
+      [(ngModel)]="content"
+      placeholder="Paste your code here..."
+    ></textarea>
+
+    <div class="row">
+      <div class="field">
+        <label>Title (Optional)</label>
+        <input
+          type="text"
+          [(ngModel)]="title"
+          placeholder="My Debug Script"
+        />
+      </div>
+
+      <div class="field">
+        <label>Expiration</label>
+        <select
+          [(ngModel)]="expireOption"
+          name="expireOption"
+          (ngModelChange)="onExpireChange($event)"
+        >
+          <option value="never">Never</option>
+          <option value="10m">10 Minutes</option>
+          <option value="1h">1 Hour</option>
+          <option value="1d">1 Day</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- 👇 USER FEEDBACK -->
+    <small class="expire-info" *ngIf="expiresAt">
+      ⏳ Expires at: {{ expiresAt | date:'medium' }}
+    </small>
+
+    <div class="actions">
+      <button class="primary-btn" (click)="savePaste()">
+        Create New Paste
+      </button>
+    </div>
+
+  </div>
+</div>

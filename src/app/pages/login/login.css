@@ -1,0 +1,199 @@
+/* ===============================
+   LOGIN PAGE – DARK THEME
+   (INPUT TEXT = BLACK)
+   =============================== */
+
+/* ---------- Page Wrapper ---------- */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--dark-main);
+  padding: 20px;
+}
+
+/* ---------- Login Card ---------- */
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.login-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--primary);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- Heading ---------- */
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 12px;
+  color: var(--text-main);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+/* Subtitle */
+.login-card p {
+  text-align: center;
+  margin-bottom: 28px;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+}
+
+/* ---------- Form Group ---------- */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+/* ---------- INPUTS (TEXT = BLACK) ---------- */
+.form-group input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  font-size: 15px;
+  background: #ffffff;          /* Light background */
+  color: #000000 !important;    /* 🔥 BLACK TEXT */
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/* Placeholder */
+.form-group input::placeholder {
+  color: #6b7280;
+}
+
+/* Focus */
+.form-group input:focus {
+  border-color: var(--primary);
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.25);
+}
+
+/* ---------- Primary Button ---------- */
+.btn {
+  width: 100%;
+  padding: 16px;
+  background: var(--primary);
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 5px 0 #1e40af;
+}
+
+.btn:hover {
+  background: #2563eb;
+  transform: translateY(-4px);
+  box-shadow: 0 9px 20px rgba(59, 130, 246, 0.35);
+}
+
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #1e40af;
+}
+
+/* Shine effect */
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  left: -100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transition: 0.6s;
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+/* Disabled */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* ---------- Error & Success ---------- */
+.error {
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  color: #f87171;
+  font-size: 0.9rem;
+}
+
+.success {
+  margin-bottom: 16px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  color: #34d399;
+  font-size: 0.9rem;
+}
+
+/* ---------- Bottom Link ---------- */
+.link {
+  text-align: center;
+  margin-top: 25px;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+}
+
+.link a {
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: 0.3s ease;
+}
+
+.link a:hover {
+  background: rgba(59, 130, 246, 0.12);
+  text-decoration: underline;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 28px;
+    border-radius: 18px;
+  }
+
+  .login-card h2 {
+    font-size: 1.6rem;
+  }
+}

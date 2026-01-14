@@ -1,1 +1,93 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Modern Reset */
+:root {
+  --primary: #042e73;
+  --dark: #0b1734;
+  --bg: #d1e0f8;
+  --accent: #3b82f6; /* Hover ke liye light blue color */
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+/* --- Page Card Style with Subtle Lift --- */
+.container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 40px;
+  background: rgb(178, 192, 212);
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover par card halka sa upar uthega */
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+/* --- Dark Navbar Style with Link Hover --- */
+nav {
+  background: var(--dark);
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+/* Navbar Links Hover Effect */
+nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Hover karne par background thoda bright hoga aur color change hoga */
+nav a:hover {
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Underline animation on hover */
+nav a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 50%;
+  background-color: var(--accent);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+nav a:hover::after {
+  width: 70%;
+}
+
+/* --- Custom Scrollbar (Optional but looks cool) --- */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--dark);
+}
