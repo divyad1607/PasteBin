@@ -21,7 +21,7 @@ public class PasteService {
     }
 
     //Create Paste
-  public Paste create(PasteRequest req){
+    public Paste create(PasteRequest req){
         Paste paste = new Paste();
         paste.setContent(req.getContent());
         paste.setMaxViews(req.getMax_views());
@@ -32,17 +32,24 @@ public class PasteService {
             );
         }
         return pasteRepository.save(paste);
-  }
-    //Get paste
-   public Paste getpaste(String id, Instant now){
-    Paste paste = pasteRepository.findById(id)
-            .orElseThrow(()-> new NotFoundException("Paste Expired"));
-    if (paste.getMaxViews()!=null &&
-    paste.getCurrentViews()>=paste.getMaxViews()){
-        throw new NotFoundException("View limit exceeded");
     }
-    paste.setCurrentViews(paste.getCurrentViews()+1);
-    pasteRepository.save(paste);
-    return paste;
+    //Get paste
+    public Paste getpaste(String id, Instant now) {
+        Paste paste = pasteRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Paste not found"));
+
+        // 1. Check if Expired (using the 'now' parameter)
+        if (paste.getExpiresAt() != null && paste.getExpiresAt().isBefore(now)) {
+            throw new NotFoundException("Paste Expired");
+        }
+
+        // 2. Check View Limit
+        if (paste.getMaxViews() != null && paste.getCurrentViews() >= paste.getMaxViews()) {
+            throw new NotFoundException("View limit exceeded");
+        }
+
+        // 3. Increment and Save
+        paste.setCurrentViews(paste.getCurrentViews() + 1);
+        return pasteRepository.save(paste);
     }
 }

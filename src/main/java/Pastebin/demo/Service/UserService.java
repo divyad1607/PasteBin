@@ -30,12 +30,12 @@ public class UserService {
 
     // LOGIN USER
     public User login(LoginRequest request){
-    User user = userRepository.findByUsername(request.getUsername())
-            .orElseThrow(()-> new NotFoundException("Invalid username or password"));
+        User user = userRepository.findByUsername(request.getUsername())
+                .orElseThrow(()-> new NotFoundException("Invalid username or password"));
 
-    if (!user.getPassword().equals(request.getPassword())){
-        throw new NotFoundException("Invalid");
+        if (!user.getPassword().equals(request.getPassword())){
+            throw new NotFoundException("Invalid");
+        }
+        return user;
     }
-    return user;
-     }
 }

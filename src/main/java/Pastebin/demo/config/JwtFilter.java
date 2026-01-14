@@ -6,12 +6,25 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.util.Collections;
 
+@Component
 public class JwtFilter extends OncePerRequestFilter {
+
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getRequestURI();
+
+        return "OPTIONS".equalsIgnoreCase(request.getMethod())   // 🔥 ADD THIS
+                || path.startsWith("/api/pastes")
+                || path.startsWith("/api/auth")
+                || path.startsWith("/api/healthz");
+    }
+
 
     @Override
     protected void doFilterInternal(
@@ -26,9 +39,9 @@ public class JwtFilter extends OncePerRequestFilter {
 
             String token = authHeader.substring(7);
 
-            if (Pastebin.demo.config.JwtUtil.validateToken(token)) {
+            if (JwtUtil.validateToken(token)) {
 
-                String username = Pastebin.demo.config.JwtUtil.extractUsername(token);
+                String username = JwtUtil.extractUsername(token);
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(
