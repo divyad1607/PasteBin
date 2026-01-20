@@ -1,51 +1,30 @@
 <div class="create-page">
+  <div class="create-card">
 
-  <div class="premium-card create-card">
+    <h2>Create New Paste</h2>
 
-    <h1>New Code Snippet</h1>
-    <p class="subtitle">Fill in the details below to share your code.</p>
-
-    <label>Content</label>
     <textarea
       [(ngModel)]="content"
-      placeholder="Paste your code here..."
+      placeholder="Paste your content here..."
     ></textarea>
 
-    <div class="row">
-      <div class="field">
-        <label>Title (Optional)</label>
-        <input
-          type="text"
-          [(ngModel)]="title"
-          placeholder="My Debug Script"
-        />
-      </div>
+    <div class="controls">
+      <select [(ngModel)]="expiryMinutes">
+        <option [ngValue]="0">Never</option>
+        <option [ngValue]="10">10 Minutes</option>
+        <option [ngValue]="60">1 Hour</option>
+        <option [ngValue]="1440">1 Day</option>
+        <option [ngValue]="10080">1 Week</option>
+      </select>
+      
 
-      <div class="field">
-        <label>Expiration</label>
-        <select
-          [(ngModel)]="expireOption"
-          name="expireOption"
-          (ngModelChange)="onExpireChange($event)"
-        >
-          <option value="never">Never</option>
-          <option value="10m">10 Minutes</option>
-          <option value="1h">1 Hour</option>
-          <option value="1d">1 Day</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- 👇 USER FEEDBACK -->
-    <small class="expire-info" *ngIf="expiresAt">
-      ⏳ Expires at: {{ expiresAt | date:'medium' }}
-    </small>
-
-    <div class="actions">
-      <button class="primary-btn" (click)="savePaste()">
-        Create New Paste
+      <button (click)="createPaste()" [disabled]="loading">
+        {{ loading ? 'Creating...' : 'Create Paste' }}
       </button>
     </div>
 
+    <p class="error" *ngIf="error">{{ error }}</p>
+
   </div>
 </div>
+

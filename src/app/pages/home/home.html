@@ -1,48 +1,11 @@
-<div class="home-wrapper">
+<div class="home-container">
+  <h1>Welcome to Pastebin</h1>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Share & Discover Code Snippets</h1>
-    <p>
-      A simple Pastebin-like platform to store, share and explore code snippets.
-    </p>
+  <p class="subtitle">
+    Create and share your private code snippets securely.
+  </p>
 
-    <a routerLink="/create" class="primary-btn">
-      + Create New Paste
-    </a>
-  </section>
-
-  <!-- CONTENT -->
-  <section class="content">
-
-    <!-- EMPTY STATE -->
-    <div class="empty-state" *ngIf="snippets.length === 0">
-      <div class="icon">📄</div>
-      <h2>No Public Pastes Yet</h2>
-      <p>
-        Looks empty here. Create your first public paste and it will appear here.
-      </p>
-
-      <a routerLink="/create" class="secondary-btn">
-        Create First Paste
-      </a>
-    </div>
-
-    <!-- FUTURE LIST -->
-    <div class="snippet-grid" *ngIf="snippets.length > 0">
-      <div class="snippet-card" *ngFor="let s of snippets">
-        <h3>{{ s.title || 'Untitled Paste' }}</h3>
-        <p class="preview">
-          {{ s.content | slice:0:120 }}...
-        </p>
-
-        <div class="card-footer">
-          <span>{{ s.createdAt | date:'mediumDate' }}</span>
-          <a [routerLink]="['/paste', s.id]">View →</a>
-        </div>
-      </div>
-    </div>
-
-  </section>
-
+  <a routerLink="/create" class="create-btn">
+    + Create Paste
+  </a>
 </div>

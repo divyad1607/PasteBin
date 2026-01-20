@@ -13,64 +13,39 @@ import { PasteService } from '../../services/PasteService';
 })
 export class CreatePaste {
 
-  title: string = '';
   content: string = '';
-
-  expireOption: string = 'never';
-  expiresAt: Date | null = null;
-  expiresAtIso: string | null = null;
+  expiryMinutes: number = 0; // 0 = Never
+  loading = false;
+  error = '';
 
   constructor(
     private pasteService: PasteService,
     private router: Router
   ) {}
 
-  // 🔹 Expire select handler
-  onExpireChange(value: string) {
-    const date = this.calculateExpiry(value);
-    this.expiresAt = date;
-    this.expiresAtIso = date ? date.toISOString() : null;
+  createPaste(): void {
 
-    console.log('ExpiresAt(local):', this.expiresAt);
-    console.log('ExpiresAt(ISO):', this.expiresAtIso);
-  }
-
-  // 🔹 Time calculation (LOCAL)
-  calculateExpiry(type: string): Date | null {
-    if (type === 'never') return null;
-
-    const now = new Date();
-
-    switch (type) {
-      case '10m':
-        now.setMinutes(now.getMinutes() + 10);
-        break;
-      case '1h':
-        now.setHours(now.getHours() + 1);
-        break;
-      case '1d':
-        now.setDate(now.getDate() + 1);
-        break;
+    if (!this.content.trim()) {
+      this.error = 'Content cannot be empty';
+      return;
     }
 
-    return now;
-  }
-
-  // 🔹 Save paste (SEPARATE METHOD)
-  savePaste() {
-    if (!this.content) return;
+    this.loading = true;
 
     const payload = {
-      title: this.title,
       content: this.content,
-      expiresAt: this.expiresAtIso
+      expiryMinutes: this.expiryMinutes
     };
 
-    console.log('FINAL PAYLOAD:', payload);
-
     this.pasteService.createPaste(payload).subscribe({
-      next: () => this.router.navigate(['/home']),
-      error: (err) => console.error(err)
+      next: (res: any) => {
+        this.loading = false;
+        this.router.navigate(['/p', res.id]);
+      },
+      error: () => {
+        this.loading = false;
+        this.error = 'Failed to create paste';
+      }
     });
   }
 }

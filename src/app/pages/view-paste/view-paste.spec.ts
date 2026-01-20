@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ViewPaste } from './view-paste';
 
 describe('ViewPaste', () => {
+  
   let component: ViewPaste;
   let fixture: ComponentFixture<ViewPaste>;
 

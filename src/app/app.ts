@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navbar } from './shared/navbar/navbar'; // Path confirm karein
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Navbar],
+  imports: [CommonModule,RouterOutlet, Navbar],
   template: `
     <app-navbar></app-navbar>
     <router-outlet></router-outlet>

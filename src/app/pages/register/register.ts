@@ -7,19 +7,18 @@ import { AuthService } from '../../services/AuthService';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './register.html',
   styleUrls: ['./register.css']
 })
 export class Register {
-  // Is line ko add karein, saare errors chale jayenge
+
   isLogin: boolean = false;
 
-  name = '';
+  username = '';
   password = '';
   error = '';
   success = '';
-  username: any;
 
   constructor(
     private authService: AuthService,
@@ -31,9 +30,16 @@ export class Register {
       username: this.username,
       password: this.password
     }).subscribe({
-      next: () => alert('User registered'),
-      error: () => alert('Register failed')
+      next: (res) => {
+        // Success message or redirect
+        alert('User registered successfully');
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        // Error handling
+        console.error('Registration failed', err);
+        alert('Registration failed. Please try again.');
+      }
     });
   }
-  
-  }
+}

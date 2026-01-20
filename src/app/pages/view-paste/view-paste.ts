@@ -1,41 +1,60 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common'; // 1. Import this
+import { PasteService } from '../../services/PasteService';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-view-paste',
-  standalone: true,
-  imports: [CommonModule],
+  standalone: true,              
+  imports: [CommonModule],   
   templateUrl: './view-paste.html',
+  styleUrls: ['./view-paste.css']
 })
 export class ViewPaste implements OnInit {
-  pasteData: any = null; // Initial value null rakhein
+
+  pasteData: any = null;
+  loading: boolean = true;
+  error: string = '';
 
   constructor(
-    private http: HttpClient, 
     private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef // Constructor mein inject karein
+    private pasteService: PasteService,
+    private cdr: ChangeDetectorRef  
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.fetchPaste(id);
-    }
-  }
-  fetchPaste(id: string): void {
-    this.http.get(`http://localhost:8080/api/pastes/${id}`)
-      .subscribe({
-        next: (data: any) => {
-          this.pasteData = data;
-          console.log('Data assigned:', this.pasteData);
+    this.route.paramMap.subscribe(params => {
+      const id = params.get('id');
+      console.log('PASTE ID:', id);
+  
+      if (!id) {
+        this.error = 'Invalid paste id';
+        this.loading = false;
+        this.cdr.detectChanges();
+        return;
+      }
+  
+      // reset state
+      this.loading = true;
+      this.pasteData = null;
+      this.error = '';
+  
+      this.pasteService.getPaste(id).subscribe({
+        next: (res: any) => {
+          console.log('PASTE RESPONSE:', res);
+          this.pasteData = res;
+          this.loading = false;
+  
+          this.cdr.detectChanges();   // 🔥 THIS IS THE FIX
         },
-        error: (err) => {
-          console.error('Fetch error:', err);
-          // Error aane par loading screen hatane ke liye
-          this.pasteData = { content: "Error: Could not load paste." }; 
+        error: () => {
+          this.error = 'Paste not found or expired';
+          this.loading = false;
+          this.cdr.detectChanges();   // 🔥 IMPORTANT
         }
       });
+    });
   }
-}
+}  
